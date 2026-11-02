@@ -1,0 +1,64 @@
+{
+  "name": "md-viewer",
+  "version": "1.0.0",
+  "description": "Visor y editor de Markdown de escritorio: árbol de carpetas, estilos, búsqueda, índice, diagramas Mermaid y edición con vista previa.",
+  "license": "MIT",
+  "author": "Sidney Rees",
+  "homepage": "https://github.com/sidneyrees/md-viewer",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sidneyrees/md-viewer.git"
+  },
+  "type": "module",
+  "main": "src/main.mjs",
+  "engines": {
+    "node": ">=20.11"
+  },
+  "scripts": {
+    "start": "node scripts/start.mjs",
+    "web": "node src/cli.mjs --open",
+    "test": "node --test",
+    "icon": "node scripts/make-icon.mjs",
+    "dist": "electron-builder --win",
+    "dist:dir": "electron-builder --dir"
+  },
+  "build": {
+    "appId": "com.sidneyrees.mdviewer",
+    "productName": "MD Viewer",
+    "artifactName": "MD-Viewer-${version}-setup.${ext}",
+    "files": [
+      "src/**/*",
+      "build/icon.png",
+      "package.json"
+    ],
+    "fileAssociations": [
+      {
+        "ext": "md",
+        "name": "Documento Markdown",
+        "description": "Documento Markdown",
+        "role": "Editor"
+      }
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "build/icon.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true
+    }
+  },
+  "devDependencies": {
+    "electron": "45.2.1",
+    "electron-builder": "26.18.0"
+  }
+}
