@@ -1,7 +1,7 @@
 {
   "name": "md-viewer",
   "version": "1.0.0",
-  "description": "Visor y editor de Markdown de escritorio: árbol de carpetas, estilos, búsqueda, índice, diagramas Mermaid y edición con vista previa.",
+  "description": "Desktop Markdown viewer and editor: folder tree, styled rendering, search, outline, Mermaid diagrams and live-preview editing.",
   "license": "MIT",
   "author": "Sidney Rees",
   "homepage": "https://github.com/sidneyrees/md-viewer",

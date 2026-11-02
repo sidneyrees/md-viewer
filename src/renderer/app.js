@@ -39,9 +39,9 @@ async function loadTree() {
   const t = $('tree');
   t.innerHTML = '';
   $('rootName').textContent = r.root.split(/[\\/]/).filter(Boolean).pop() || r.root;
-  $('btnRoot').title = r.root + '\n(clic para cambiar de carpeta)';
+  $('btnRoot').title = r.root + '\n(click to change folder)';
   if (!r.tree.length) {
-    t.innerHTML = '<div class="noresults">Esta carpeta no tiene archivos .md.</div>';
+    t.innerHTML = '<div class="noresults">This folder has no .md files.</div>';
     return;
   }
   r.tree.forEach((n) => t.appendChild(renderNode(n, 0)));
@@ -54,7 +54,7 @@ const sep = (p) => (p.includes('\\') ? '\\' : '/');
 async function pickBrowse(p) {
   const r = await fetch('/api/browse?path=' + encodeURIComponent(p));
   if (!r.ok) {
-    $('pickInfo').textContent = 'No se puede abrir esa ruta.';
+    $('pickInfo').textContent = 'Cannot open that path.';
     return;
   }
   const d = await r.json();
@@ -62,8 +62,8 @@ async function pickBrowse(p) {
   $('pickPath').value = d.path;
   $('pickUse').disabled = !d.path;
   $('pickInfo').textContent = d.path
-    ? d.mdCount + ' archivo(s) .md en esta carpeta'
-    : 'Elegí una unidad';
+    ? d.mdCount + ' .md file(s) in this folder'
+    : 'Pick a drive';
   const list = $('pickList');
   list.innerHTML = '';
   const add = (label, target) => {
@@ -91,10 +91,10 @@ async function switchRoot(path) {
   current = null;
   original = '';
   $('search').value = '';
-  $('title').textContent = 'Elegí un archivo';
+  $('title').textContent = 'Choose a file';
   document.title = '.MD Viewer';
   $('btnEdit').disabled = true;
-  $('view').innerHTML = '<p class="empty">Elegí un archivo del árbol de la izquierda.</p>';
+  $('view').innerHTML = '<p class="empty">Choose a file from the tree on the left.</p>';
   $('toc').classList.remove('has');
   history.replaceState(null, '', location.pathname);
   setStatus('');
@@ -103,7 +103,7 @@ async function switchRoot(path) {
 }
 
 $('btnRoot').onclick = async () => {
-  if (dirty() && !confirm('Hay cambios sin guardar. ¿Descartarlos?')) return;
+  if (dirty() && !confirm('You have unsaved changes. Discard them?')) return;
   // Desktop app: native folder dialog. Browser: built-in picker below.
   if (window.desktop) {
     const picked = await window.desktop.pickFolder();
@@ -121,7 +121,7 @@ $('pickPath').addEventListener('keydown', (e) => {
 $('pickCancel').onclick = () => $('picker').close();
 $('pickUse').onclick = async () => {
   if (await switchRoot(pickCurrent)) $('picker').close();
-  else $('pickInfo').textContent = 'Carpeta inválida.';
+  else $('pickInfo').textContent = 'Invalid folder.';
 };
 
 // In-page text prompt (window.prompt is not available in Electron).
@@ -274,7 +274,7 @@ function buildToc() {
   const toc = $('toc');
   const heads = [...$('view').querySelectorAll('h1,h2,h3,h4')];
   toc.classList.toggle('has', heads.length > 1);
-  toc.innerHTML = '<h2>En esta página</h2>';
+  toc.innerHTML = '<h2>On this page</h2>';
   const min = Math.min(...heads.map((h) => Number(h.tagName[1])));
   heads.forEach((h) => {
     const a = document.createElement('a');
@@ -307,10 +307,10 @@ $('content').addEventListener('scroll', updateToc);
 // ---------- Open / edit / save ----------
 async function openFile(p) {
   if (p === current && !editing) return;
-  if (dirty() && !confirm('Hay cambios sin guardar. ¿Descartarlos?')) return;
+  if (dirty() && !confirm('You have unsaved changes. Discard them?')) return;
   const r = await fetch('/api/file?path=' + encodeURIComponent(p));
   if (!r.ok) {
-    setStatus('No se pudo abrir ' + p);
+    setStatus('Could not open ' + p);
     return;
   }
   const data = await r.json();
@@ -354,19 +354,19 @@ async function save() {
     body: JSON.stringify({ content }),
   });
   if (!r.ok) {
-    setStatus('Error al guardar');
+    setStatus('Error saving');
     return;
   }
   original = content;
   $('btnSave').disabled = true;
   render(original, $('view'));
-  setStatus('Guardado ' + new Date().toLocaleTimeString());
+  setStatus('Saved ' + new Date().toLocaleTimeString());
 }
 
 $('btnEdit').onclick = startEditing;
 $('btnSave').onclick = save;
 $('btnCancel').onclick = () => {
-  if (dirty() && !confirm('¿Descartar los cambios?')) return;
+  if (dirty() && !confirm('Discard your changes?')) return;
   stopEditing();
   setStatus('');
 };
@@ -374,7 +374,7 @@ $('btnCancel').onclick = () => {
 let t;
 $('editor').addEventListener('input', () => {
   $('btnSave').disabled = !dirty();
-  setStatus(dirty() ? 'Sin guardar' : '');
+  setStatus(dirty() ? 'Unsaved' : '');
   clearTimeout(t);
   t = setTimeout(() => render($('editor').value, $('preview')), 150);
 });
@@ -447,7 +447,7 @@ async function runSearch() {
   if (seq !== searchSeq) return; // a newer query is already running
   t.innerHTML = '';
   if (!r.results.length) {
-    t.innerHTML = '<div class="noresults">Sin resultados.</div>';
+    t.innerHTML = '<div class="noresults">No results.</div>';
     return;
   }
   r.results.forEach((h) => {
@@ -496,11 +496,11 @@ async function refresh() {
 }
 
 $('btnNew').onclick = async () => {
-  if (dirty() && !confirm('Hay cambios sin guardar. ¿Descartarlos?')) return;
+  if (dirty() && !confirm('You have unsaved changes. Discard them?')) return;
   const dir = current ? dirOf(current) : '';
   const input = await askText(
-    'Ruta del nuevo archivo (relativa a la carpeta raíz)',
-    (dir ? dir + '/' : '') + 'nuevo.md',
+    'Path of the new file (relative to the root folder)',
+    (dir ? dir + '/' : '') + 'new.md',
   );
   if (!input || !clean(input)) return;
   stopEditing();
@@ -533,9 +533,9 @@ $('tree').addEventListener('contextmenu', (e) => {
 
 $('mRename').onclick = async () => {
   const from = menuPath;
-  if (from === current && dirty() && !confirm('Hay cambios sin guardar. ¿Descartarlos?'))
+  if (from === current && dirty() && !confirm('You have unsaved changes. Discard them?'))
     return;
-  const input = await askText('Nueva ruta', from);
+  const input = await askText('New path', from);
   if (!input || !clean(input)) return;
   if (from === current) stopEditing();
   const to = withMd(clean(input));
@@ -550,15 +550,15 @@ $('mRename').onclick = async () => {
 
 $('mDelete').onclick = async () => {
   const p = menuPath;
-  if (!confirm('¿Eliminar ' + p + '? No se puede deshacer desde el visor.')) return;
+  if (!confirm('Delete ' + p + '? This cannot be undone from the viewer.')) return;
   if (await api('DELETE', p)) {
     if (p === current) {
       stopEditing();
       current = null;
       original = '';
-      $('title').textContent = 'Elegí un archivo';
+      $('title').textContent = 'Choose a file';
       $('btnEdit').disabled = true;
-      $('view').innerHTML = '<p class="empty">Archivo eliminado.</p>';
+      $('view').innerHTML = '<p class="empty">File deleted.</p>';
       $('toc').classList.remove('has');
       history.replaceState(null, '', location.pathname);
     }

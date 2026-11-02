@@ -21,10 +21,10 @@ const q = (p) => encodeURIComponent(p);
 before(async () => {
   dir = fs.mkdtempSync(path.join(os.tmpdir(), 'mdv-'));
   fs.mkdirSync(path.join(dir, 'sub'));
-  fs.writeFileSync(path.join(dir, 'a.md'), '# Hola\n\nTexto Ñandú\n');
+  fs.writeFileSync(path.join(dir, 'a.md'), '# Hello\n\nText with ñandú\n');
   fs.writeFileSync(path.join(dir, 'sub', 'b.MD'), '# B\n');
-  fs.writeFileSync(path.join(dir, 'notes.txt'), 'no es markdown');
-  fs.writeFileSync(path.join(dir, 'foomd'), 'termina en md pero no es .md');
+  fs.writeFileSync(path.join(dir, 'notes.txt'), 'not markdown');
+  fs.writeFileSync(path.join(dir, 'foomd'), 'ends in md but is not .md');
   viewer = await createViewerServer({ rendererDir, root: dir });
 });
 
@@ -43,7 +43,7 @@ test('lists only .md files, nested and case-insensitive', async () => {
 
 test('reads a file and refuses non-markdown files', async () => {
   const ok = await (await api('/api/file?path=' + q('a.md'))).json();
-  assert.match(ok.content, /Hola/);
+  assert.match(ok.content, /Hello/);
   assert.equal((await api('/api/file?path=' + q('notes.txt'))).status, 404);
   assert.equal((await api('/api/file?path=' + q('foomd'))).status, 404);
 });

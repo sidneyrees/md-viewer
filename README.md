@@ -1,60 +1,58 @@
 <div align="center">
 
-<img src="build/icon.png" alt="Logo de .MD Viewer" width="120" />
+<img src="build/icon.png" alt=".MD Viewer logo" width="120" />
 
 # .MD Viewer
 
-**Leé y editá tus documentos Markdown como se merecen.**<br />
-Un explorador de carpetas a la izquierda, el documento con estilos a la derecha y edición con vista previa en vivo. Sin nube, sin cuentas, sin configuración.
+**Read and edit your Markdown documents the way they deserve.**<br />
+A folder explorer on the left, the styled document on the right, and editing with a live preview. No cloud, no accounts, no setup.
 
-[![Licencia: MIT](https://img.shields.io/badge/licencia-MIT-blue.svg)](LICENSE)
-![Plataforma](https://img.shields.io/badge/instalador-Windows-0078D6)
-![Funciona sin internet](https://img.shields.io/badge/funciona-sin%20internet-2ea44f)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+![Platform](https://img.shields.io/badge/installer-Windows-0078D6)
+![Works offline](https://img.shields.io/badge/works-offline-2ea44f)
 
-<img src="docs/img/lectura.jpg" alt=".MD Viewer mostrando un documento con árbol de carpetas e índice" width="900" />
+<img src="docs/img/reading.jpg" alt=".MD Viewer showing a document with the folder tree and outline" width="900" />
 
 </div>
 
 ---
 
-> *A desktop Markdown viewer and editor: folder tree, styled rendering, full-text search, outline, Mermaid diagrams and live-preview editing. Offline, private, no dependencies at runtime.*
+## Why it exists
 
-## Por qué existe
+`.md` files are great to write and rather uncomfortable to read: plain text full of symbols, tables you cannot make sense of, folders with dozens of documents. **.MD Viewer** fixes exactly that. Open a folder and browse your documents like a website, with the comfort of a file explorer.
 
-Los archivos `.md` son excelentes para escribir y bastante incómodos para leer: texto plano lleno de símbolos, tablas que no se entienden, carpetas con decenas de documentos. **.MD Viewer** resuelve exactamente eso. Abrís una carpeta y navegás tus documentos como si fueran un sitio, con la comodidad de un explorador de archivos.
+It is built for reading a lot and editing a little: project documentation, notes, specifications, knowledge bases, the `docs/` folder of any repository.
 
-Es una herramienta pensada para leer mucho y editar un poco: documentación de proyectos, notas, especificaciones, bases de conocimiento, el `docs/` de cualquier repositorio.
-
-## Qué hace
+## What it does
 
 | | |
 | --- | --- |
-| 🗂️ **Árbol de carpetas** | Navegás como en el Explorador de Windows. Solo muestra las carpetas que contienen `.md`. |
-| 🎨 **Lectura con estilos** | Títulos, listas, tablas, código, citas, listas de tareas e imágenes, con tema claro u oscuro según tu sistema. |
-| 🔎 **Búsqueda (Ctrl+K)** | Busca en nombres y en el contenido de todos los documentos, con fragmentos resaltados. |
-| 🧭 **Índice del documento** | Panel con los títulos del archivo, que marca la sección donde estás. |
-| 📊 **Diagramas Mermaid** | Los bloques ` ```mermaid ` se dibujan como diagramas: flujos, secuencias, y más. |
-| ✏️ **Edición con vista previa** | El texto fuente a un lado y el resultado en vivo al otro. **Ctrl+S** guarda en disco. |
-| 🔗 **Enlaces entre documentos** | Los enlaces relativos entre `.md` se abren dentro del visor, y las imágenes relativas se muestran. |
-| 📁 **Gestión de archivos** | Crear, renombrar, mover y eliminar documentos desde el árbol (clic derecho). |
-| 🖱️ **Abrir con doble clic** | Registrado como editor de archivos `.md`: al abrir uno, el visor muestra su carpeta completa. |
+| 🗂️ **Folder tree** | Browse like in Windows Explorer. Only folders that contain `.md` files are shown. |
+| 🎨 **Styled reading** | Headings, lists, tables, code, quotes, task lists and images, with a light or dark theme following your system. |
+| 🔎 **Search (Ctrl+K)** | Searches file names and the contents of every document, with highlighted snippets. |
+| 🧭 **Document outline** | A panel with the file's headings that highlights the section you are in. |
+| 📊 **Mermaid diagrams** | ` ```mermaid ` blocks are drawn as diagrams: flowcharts, sequences and more. |
+| ✏️ **Editing with preview** | Source on one side, live result on the other. **Ctrl+S** saves to disk. |
+| 🔗 **Links between documents** | Relative links between `.md` files open inside the viewer, and relative images are shown. |
+| 📁 **File management** | Create, rename, move and delete documents from the tree (right-click). |
+| 🖱️ **Open with a double click** | Registered as an editor for `.md` files: opening one shows its whole folder in the viewer. |
 
 <table>
   <tr>
-    <td width="50%"><img src="docs/img/edicion.jpg" alt="Modo edición con vista previa en vivo" /><br /><sub><b>Edición</b> con vista previa en vivo</sub></td>
-    <td width="50%"><img src="docs/img/diagramas.jpg" alt="Diagramas Mermaid renderizados" /><br /><sub><b>Diagramas</b> Mermaid dentro del documento</sub></td>
+    <td width="50%"><img src="docs/img/editing.jpg" alt="Edit mode with live preview" /><br /><sub><b>Editing</b> with a live preview</sub></td>
+    <td width="50%"><img src="docs/img/diagrams.jpg" alt="Rendered Mermaid diagrams" /><br /><sub><b>Mermaid diagrams</b> inside the document</sub></td>
   </tr>
   <tr>
-    <td width="50%"><img src="docs/img/busqueda.jpg" alt="Búsqueda en el contenido de todos los documentos" /><br /><sub><b>Búsqueda</b> en nombres y contenido</sub></td>
+    <td width="50%"><img src="docs/img/search.jpg" alt="Searching the contents of all documents" /><br /><sub><b>Search</b> across names and contents</sub></td>
     <td width="50%"></td>
   </tr>
 </table>
 
-## Instalación
+## Installation
 
 ### Windows
 
-Generá el instalador desde el código fuente (requiere [Node.js](https://nodejs.org) 20.11 o superior):
+Build the installer from source (requires [Node.js](https://nodejs.org) 20.11 or later):
 
 ```bash
 git clone https://github.com/sidneyrees/md-viewer.git
@@ -63,96 +61,96 @@ npm install
 npm run dist
 ```
 
-El instalador queda en `dist/MD-Viewer-<versión>-setup.exe` (unos 120 MB, porque incluye Electron). Permite elegir la carpeta de instalación, crea un acceso directo en el escritorio y registra la app como editor de archivos `.md`.
+The installer ends up in `dist/MD-Viewer-<version>-setup.exe` (about 120 MB, because it bundles Electron). It lets you choose the install folder, creates a desktop shortcut and registers the app as an editor for `.md` files.
 
-> El instalador no está firmado digitalmente, así que Windows SmartScreen puede mostrar un aviso la primera vez ("Windows protegió su PC"). Es esperable en software independiente sin certificado de firma.
+> The installer is not code-signed, so Windows SmartScreen may show a warning the first time ("Windows protected your PC"). This is expected for independent software without a signing certificate.
 
-### Probarlo sin instalar
+### Try it without installing
 
 ```bash
 npm install
 npm start
 ```
 
-### macOS y Linux
+### macOS and Linux
 
-El código es multiplataforma y `npm start` debería funcionar, pero hoy el proyecto solo se probó y se empaqueta para Windows. Las contribuciones para empaquetar otras plataformas son bienvenidas.
+The code is cross-platform and `npm start` should work, but the project has only been tested and packaged for Windows so far. Contributions to package other platforms are welcome.
 
-## Uso
+## Usage
 
-1. Abrí la app. La primera vez te muestra tu carpeta de Documentos.
-2. Hacé clic en el botón con el nombre de la carpeta, arriba del árbol (o **Ctrl+O**), y elegí la carpeta de trabajo con el selector nativo. La app recuerda la última.
-3. Elegí un documento en el árbol. Para editarlo, **Editar**; para guardar, **Ctrl+S**.
+1. Open the app. The first time it shows your Documents folder.
+2. Click the button with the folder name above the tree (or press **Ctrl+O**) and pick the working folder with the native picker. The app remembers the last one.
+3. Choose a document in the tree. Click **Edit** to edit it and **Ctrl+S** to save.
 
-También podés hacer doble clic sobre cualquier `.md` (o ejecutar `"MD Viewer.exe" ruta\al\archivo.md`): se abre su carpeta y se selecciona el archivo. Si la app ya está abierta, reutiliza la misma ventana.
+You can also double-click any `.md` file (or run `"MD Viewer.exe" path\to\file.md`): its folder opens and the file is selected. If the app is already open, it reuses the same window.
 
-Para probarlo con material de muestra, abrí la carpeta [`examples/`](examples/) de este repositorio.
+To try it with sample material, open the [`examples/`](examples/) folder of this repository.
 
-### Atajos
+### Shortcuts
 
-| Atajo | Acción |
+| Shortcut | Action |
 | --- | --- |
-| `Ctrl+O` | Elegir carpeta de trabajo |
-| `Ctrl+K` | Buscar |
-| `Ctrl+S` | Guardar (en modo edición) |
-| `Esc` en la búsqueda | Limpiar y volver al árbol |
-| `Ctrl+Plus` / `Ctrl+Minus` / `Ctrl+0` | Acercar, alejar y tamaño real |
-| Clic derecho en un archivo | Renombrar o eliminar |
+| `Ctrl+O` | Choose working folder |
+| `Ctrl+K` | Search |
+| `Ctrl+S` | Save (in edit mode) |
+| `Esc` in the search box | Clear and return to the tree |
+| `Ctrl+Plus` / `Ctrl+Minus` / `Ctrl+0` | Zoom in, zoom out, actual size |
+| Right-click a file | Rename or delete |
 
-### Modo navegador
+### Browser mode
 
-La misma interfaz funciona sin Electron, en una pestaña del navegador:
+The same interface works without Electron, in a browser tab:
 
 ```bash
-npm run web                          # abre http://127.0.0.1:4321
-node src/cli.mjs <carpeta> [puerto]  # elegir carpeta y puerto
+npm run web                          # opens http://127.0.0.1:4321
+node src/cli.mjs <folder> [port]     # choose folder and port
 ```
 
-En este modo el selector de carpetas es uno propio de la página en lugar del diálogo nativo.
+In this mode the folder picker is the page's own instead of the native dialog.
 
-## Privacidad y seguridad
+## Privacy and security
 
-- **Todo es local.** No hay cuentas, telemetría ni conexiones a internet: las librerías vienen incluidas y la app funciona sin conexión.
-- **Solo escucha en `127.0.0.1`**, en un puerto libre, y rechaza pedidos cuyo `Host` u `Origin` no sean los suyos (protege contra páginas web que intenten hablarle).
-- **Solo toca archivos `.md`** dentro de la carpeta elegida. Crear y renombrar nunca pisan un archivo existente. **Eliminar es definitivo** desde el visor: si tu carpeta está en Git, tenés el respaldo.
-- **El contenido se sanitiza.** El HTML que sale de un documento pasa por [DOMPurify](https://github.com/cure53/DOMPurify) y la página corre con una Content-Security-Policy estricta, así que abrir un `.md` de terceros no ejecuta código. La ventana usa aislamiento de contexto y sandbox, y expone al documento una sola capacidad: el diálogo para elegir carpeta.
-- Los enlaces externos se abren en tu navegador, nunca dentro de la app.
+- **Everything is local.** No accounts, no telemetry, no internet connections: the libraries are bundled and the app works offline.
+- **It only listens on `127.0.0.1`**, on a free port, and rejects requests whose `Host` or `Origin` is not its own (this protects against web pages trying to talk to it).
+- **It only touches `.md` files** inside the chosen folder. Create and rename never overwrite an existing file. **Delete is permanent** from the viewer: if your folder is in Git, you have a backup.
+- **Content is sanitized.** The HTML produced from a document goes through [DOMPurify](https://github.com/cure53/DOMPurify) and the page runs with a strict Content-Security-Policy, so opening a third-party `.md` does not run code. The window uses context isolation and the sandbox, and exposes a single capability to the document: the folder-picker dialog.
+- External links open in your browser, never inside the app.
 
-## Desarrollo
+## Development
 
 ```bash
 npm install
-npm start          # app de escritorio en modo desarrollo
-npm test           # pruebas del servidor (node:test, sin dependencias)
-npm run dist       # instalador de Windows en dist/
-npm run dist:dir   # app desempaquetada en dist/win-unpacked/
-npm run icon       # regenera build/icon.png
+npm start          # desktop app in development mode
+npm test           # server tests (node:test, no dependencies)
+npm run dist       # Windows installer in dist/
+npm run dist:dir   # unpacked app in dist/win-unpacked/
+npm run icon       # regenerate build/icon.png
 ```
 
 ```text
 src/
-  main.mjs          proceso principal de Electron: ventana, menú, .md por doble clic
-  preload.cjs       puente mínimo: el diálogo nativo de carpetas
-  server.mjs        servidor local (API de archivos + archivos estáticos)
-  cli.mjs           modo navegador
-  renderer/         interfaz: index.html, app.js, styles.css y vendor/
-examples/           carpeta de muestra con contenido ficticio
-test/               pruebas del servidor
+  main.mjs          Electron main process: window, menu, .md by double click
+  preload.cjs       minimal bridge: the native folder dialog
+  server.mjs        local server (file API + static files)
+  cli.mjs           browser mode
+  renderer/         interface: index.html, app.js, styles.css and vendor/
+examples/           sample folder with fictional content
+test/               server tests
 ```
 
-La interfaz no tiene paso de compilación: es HTML, CSS y JavaScript que Electron (o el navegador) carga tal cual. El servidor y la app comparten el mismo código.
+The interface has no build step: it is plain HTML, CSS and JavaScript that Electron (or the browser) loads as is. The server and the app share the same code.
 
-> Si lanzás la app desde una terminal que define `ELECTRON_RUN_AS_NODE` (por ejemplo la integrada de VS Code), `electron .` se cierra apenas arranca. `npm start` ya limpia esa variable.
+> If you launch the app from a terminal that defines `ELECTRON_RUN_AS_NODE` (for example VS Code's integrated one), `electron .` exits right after starting. `npm start` already clears that variable.
 
-## Estado y próximos pasos
+## Status and next steps
 
-La versión 1.0 cubre lectura, búsqueda, índice, Mermaid, edición y gestión de archivos. Ideas abiertas, sin compromiso de fecha:
+Version 1.0 covers reading, search, outline, Mermaid, editing and file management. Open ideas, with no committed dates:
 
-- Publicar el instalador en la sección *Releases* y firmarlo.
-- Empaquetado para macOS y Linux.
-- Interfaz en otros idiomas (hoy está en español).
-- Resaltado de sintaxis en bloques de código y modo de edición con atajos de formato.
+- Publish the installer under *Releases* and sign it.
+- Packaging for macOS and Linux.
+- Interface translations (it is currently English only).
+- Syntax highlighting in code blocks and formatting shortcuts in edit mode.
 
-## Licencia
+## License
 
-[MIT](LICENSE). Incluye, sin modificarlas, las librerías [marked](https://github.com/markedjs/marked), [mermaid](https://github.com/mermaid-js/mermaid) y [DOMPurify](https://github.com/cure53/DOMPurify); sus licencias están en [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md). La app empaquetada incluye además [Electron](https://www.electronjs.org/) y Chromium con sus licencias.
+[MIT](LICENSE). It bundles, unmodified, the libraries [marked](https://github.com/markedjs/marked), [mermaid](https://github.com/mermaid-js/mermaid) and [DOMPurify](https://github.com/cure53/DOMPurify); their licenses are in [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md). The packaged app also includes [Electron](https://www.electronjs.org/) and Chromium with their licenses.

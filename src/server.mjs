@@ -127,7 +127,7 @@ export function createViewerServer({
     }
     return out.sort((a, b) =>
       a.type === b.type
-        ? a.name.localeCompare(b.name, 'es', { numeric: true })
+        ? a.name.localeCompare(b.name, 'en', { numeric: true })
         : a.type === 'dir'
           ? -1
           : 1,
@@ -180,7 +180,7 @@ export function createViewerServer({
         dirs.push(e.name);
       else if (e.isFile() && isMd(e.name)) mdCount++;
     }
-    dirs.sort((a, b) => a.localeCompare(b, 'es', { numeric: true }));
+    dirs.sort((a, b) => a.localeCompare(b, 'en', { numeric: true }));
     const up = path.dirname(dir);
     return {
       path: dir,
@@ -223,7 +223,7 @@ export function createViewerServer({
       }
       if (url.pathname === '/api/browse') {
         const r = browse(rel);
-        return r ? send(res, 200, JSON.stringify(r)) : fail(404, 'no existe');
+        return r ? send(res, 200, JSON.stringify(r)) : fail(404, 'not found');
       }
       if (url.pathname === '/api/search') {
         const q = (url.searchParams.get('q') || '').trim();
@@ -232,7 +232,7 @@ export function createViewerServer({
       if (url.pathname === '/api/root' && req.method === 'POST') {
         return void readJson(req).then((b) => {
           const next = path.resolve(String(b.path || ''));
-          if (!b.path || !isDir(next)) return fail(400, 'carpeta inválida');
+          if (!b.path || !isDir(next)) return fail(400, 'invalid folder');
           ROOT = next;
           remember();
           send(res, 200, JSON.stringify({ root: ROOT }));
@@ -242,7 +242,7 @@ export function createViewerServer({
         const full = safe(rel);
         const exists = full && isMd(full) && fs.existsSync(full);
         if (req.method === 'GET') {
-          if (!exists) return fail(404, 'no existe');
+          if (!exists) return fail(404, 'not found');
           return send(
             res,
             200,
@@ -251,13 +251,13 @@ export function createViewerServer({
         }
         if (req.method === 'POST') {
           // Create an empty .md (and missing folders); never overwrites.
-          if (!full || !isMd(full)) return fail(400, 'ruta inválida (debe terminar en .md)');
-          if (fs.existsSync(full)) return fail(409, 'ya existe');
+          if (!full || !isMd(full)) return fail(400, 'invalid path (must end in .md)');
+          if (fs.existsSync(full)) return fail(409, 'already exists');
           fs.mkdirSync(path.dirname(full), { recursive: true });
           fs.writeFileSync(full, '# ' + path.basename(full, path.extname(full)) + '\n', 'utf8');
           return send(res, 200, '{"ok":true}');
         }
-        if (!exists) return fail(404, 'no existe');
+        if (!exists) return fail(404, 'not found');
         if (req.method === 'PUT') {
           return void readJson(req).then((b) => {
             fs.writeFileSync(full, String(b.content ?? ''), 'utf8');
@@ -268,8 +268,8 @@ export function createViewerServer({
           // Rename / move; never overwrites.
           return void readJson(req).then((b) => {
             const to = safe(String(b.to || ''));
-            if (!to || !isMd(to)) return fail(400, 'ruta inválida (debe terminar en .md)');
-            if (fs.existsSync(to)) return fail(409, 'ya existe');
+            if (!to || !isMd(to)) return fail(400, 'invalid path (must end in .md)');
+            if (fs.existsSync(to)) return fail(409, 'already exists');
             fs.mkdirSync(path.dirname(to), { recursive: true });
             fs.renameSync(full, to);
             send(res, 200, '{"ok":true}');
@@ -284,7 +284,7 @@ export function createViewerServer({
         // Relative files (images) referenced from a .md
         const full = safe(decodeURIComponent(url.pathname.slice(5)));
         if (!full || !fs.existsSync(full) || !fs.statSync(full).isFile())
-          return send(res, 404, 'no existe', 'text/plain');
+          return send(res, 404, 'not found', 'text/plain');
         return send(
           res,
           200,

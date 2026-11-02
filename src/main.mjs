@@ -91,11 +91,11 @@ function createWindow(hash = '') {
   win.webContents.on('will-prevent-unload', (event) => {
     const choice = dialog.showMessageBoxSync(win, {
       type: 'question',
-      buttons: ['Descartar cambios', 'Cancelar'],
+      buttons: ['Discard changes', 'Cancel'],
       defaultId: 1,
       cancelId: 1,
-      message: 'Hay cambios sin guardar',
-      detail: 'Si continuás, se pierden.',
+      message: 'You have unsaved changes',
+      detail: 'If you continue, they will be lost.',
     });
     if (choice === 0) event.preventDefault();
   });
@@ -121,54 +121,54 @@ function buildMenu() {
   const about = () =>
     dialog.showMessageBox(win, {
       type: 'info',
-      title: 'Acerca de .MD Viewer',
+      title: 'About .MD Viewer',
       message: '.MD Viewer',
-      detail: `Versión ${app.getVersion()}\nElectron ${process.versions.electron}\n\n${REPO_URL}`,
+      detail: `Version ${app.getVersion()}\nElectron ${process.versions.electron}\n\n${REPO_URL}`,
     });
   Menu.setApplicationMenu(
     Menu.buildFromTemplate([
       {
-        label: 'Archivo',
+        label: 'File',
         submenu: [
           {
-            label: 'Abrir carpeta…',
+            label: 'Open folder…',
             accelerator: 'CmdOrCtrl+O',
             click: () => win?.webContents.executeJavaScript("document.getElementById('btnRoot').click()"),
           },
           { type: 'separator' },
-          { role: 'quit', label: 'Salir' },
+          { role: 'quit', label: 'Quit' },
         ],
       },
       {
-        label: 'Edición',
+        label: 'Edit',
         submenu: [
-          { role: 'undo', label: 'Deshacer' },
-          { role: 'redo', label: 'Rehacer' },
+          { role: 'undo', label: 'Undo' },
+          { role: 'redo', label: 'Redo' },
           { type: 'separator' },
-          { role: 'cut', label: 'Cortar' },
-          { role: 'copy', label: 'Copiar' },
-          { role: 'paste', label: 'Pegar' },
-          { role: 'selectAll', label: 'Seleccionar todo' },
+          { role: 'cut', label: 'Cut' },
+          { role: 'copy', label: 'Copy' },
+          { role: 'paste', label: 'Paste' },
+          { role: 'selectAll', label: 'Select all' },
         ],
       },
       {
-        label: 'Ver',
+        label: 'View',
         submenu: [
-          { role: 'resetZoom', label: 'Tamaño real' },
-          { role: 'zoomIn', label: 'Acercar' },
-          { role: 'zoomOut', label: 'Alejar' },
+          { role: 'resetZoom', label: 'Actual size' },
+          { role: 'zoomIn', label: 'Zoom in' },
+          { role: 'zoomOut', label: 'Zoom out' },
           { type: 'separator' },
-          { role: 'togglefullscreen', label: 'Pantalla completa' },
+          { role: 'togglefullscreen', label: 'Full screen' },
           ...(app.isPackaged
             ? []
-            : [{ role: 'reload', label: 'Recargar' }, { role: 'toggleDevTools' }]),
+            : [{ role: 'reload', label: 'Reload' }, { role: 'toggleDevTools' }]),
         ],
       },
       {
-        label: 'Ayuda',
+        label: 'Help',
         submenu: [
-          { label: 'Sitio del proyecto', click: () => shell.openExternal(REPO_URL) },
-          { label: 'Acerca de', click: about },
+          { label: 'Project website', click: () => shell.openExternal(REPO_URL) },
+          { label: 'About', click: about },
         ],
       },
     ]),
@@ -205,7 +205,7 @@ if (!app.requestSingleInstanceLock()) {
     ipcMain.handle('pick-folder', async (event) => {
       if (!event.senderFrame?.url.startsWith(viewer.url)) return null;
       const result = await dialog.showOpenDialog(win, {
-        title: 'Elegir carpeta de trabajo',
+        title: 'Choose working folder',
         properties: ['openDirectory'],
         defaultPath: viewer.getRoot(),
       });

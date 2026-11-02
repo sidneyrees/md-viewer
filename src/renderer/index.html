@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -17,53 +17,53 @@
     <aside id="side">
       <h1>📄 .MD Viewer</h1>
       <div id="rootbar">
-        <button id="btnRoot" title="Cambiar de carpeta">📂 <span id="rootName"></span></button>
+        <button id="btnRoot" title="Change folder">📂 <span id="rootName"></span></button>
       </div>
       <div id="tools">
-        <input id="search" type="search" placeholder="Buscar (Ctrl+K)" spellcheck="false" />
-        <button id="btnNew" title="Nuevo archivo">＋</button>
+        <input id="search" type="search" placeholder="Search (Ctrl+K)" spellcheck="false" />
+        <button id="btnNew" title="New file">＋</button>
       </div>
       <div id="tree"></div>
     </aside>
     <div id="resizer"></div>
     <dialog id="picker">
-      <h3>Elegir carpeta de trabajo</h3>
+      <h3>Choose working folder</h3>
       <div class="prow">
-        <input id="pickPath" spellcheck="false" placeholder="Pegá o escribí una ruta y Enter" />
-        <button id="pickGo">Ir</button>
+        <input id="pickPath" spellcheck="false" placeholder="Paste or type a path and press Enter" />
+        <button id="pickGo">Go</button>
       </div>
       <div id="pickList"></div>
       <div id="pickInfo"></div>
       <div class="pbtns">
-        <button id="pickCancel">Cancelar</button>
-        <button id="pickUse" class="primary">Usar esta carpeta</button>
+        <button id="pickCancel">Cancel</button>
+        <button id="pickUse" class="primary">Use this folder</button>
       </div>
     </dialog>
     <dialog id="ask">
       <h3 id="askTitle"></h3>
       <input id="askInput" spellcheck="false" />
       <div class="pbtns">
-        <button id="askCancel">Cancelar</button>
-        <button id="askOk" class="primary">Aceptar</button>
+        <button id="askCancel">Cancel</button>
+        <button id="askOk" class="primary">OK</button>
       </div>
     </dialog>
     <div id="menu">
-      <div id="mRename">Renombrar</div>
-      <div id="mDelete">Eliminar</div>
+      <div id="mRename">Rename</div>
+      <div id="mDelete">Delete</div>
     </div>
     <main id="main">
       <div id="bar">
-        <span id="title">Elegí un archivo</span>
+        <span id="title">Choose a file</span>
         <span id="status"></span>
-        <button id="btnEdit" disabled>Editar</button>
+        <button id="btnEdit" disabled>Edit</button>
         <button id="btnSave" class="primary" disabled style="display: none">
-          Guardar (Ctrl+S)
+          Save (Ctrl+S)
         </button>
-        <button id="btnCancel" style="display: none">Cancelar</button>
+        <button id="btnCancel" style="display: none">Cancel</button>
       </div>
       <div id="content">
         <div id="view" class="md">
-          <p class="empty">Elegí un archivo del árbol de la izquierda.</p>
+          <p class="empty">Choose a file from the tree on the left.</p>
         </div>
         <nav id="toc"></nav>
       </div>
